@@ -32,6 +32,15 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+    const goodName = button.dataset.goodName;
+
+    if (goodName) {
+      this.selectGood(goodName);
+    }
+  };
+
   render() {
     const isSelected = this.state.selectedGood !== '';
 
@@ -80,7 +89,8 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.selectGood(good)}
+                        data-good-name={good}
+                        onClick={this.handleClick}
                       >
                         +
                       </button>
